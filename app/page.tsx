@@ -147,7 +147,7 @@ const HomePage = () => {
        {/* Features Section - Bento Grid */}
   <section className="py-20 px-6 relative">
     <div className="max-w-7xl mx-auto">
-      <PointCloudAnimation>
+      
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ const HomePage = () => {
             </span>
           </h2>
         </motion.div>
-      </PointCloudAnimation>
+      
 
       {/* Bento Grid */}
       <motion.div
