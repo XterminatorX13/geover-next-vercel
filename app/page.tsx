@@ -14,7 +14,6 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { AuroraBackground } from "@/components/aurora-background"
 import { SpiritLevelLoader } from "@/components/spirit-level-loader"
 import { ChallengesSolutions } from "@/components/challenges-solutions"
-import { PointCloudAnimation } from "@/components/point-cloud-animation"
 
 const HomePage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
