@@ -161,14 +161,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Cursor Light Effect */}
-      <motion.div
-        className="fixed inset-0 pointer-events-none z-10"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.06), transparent 40%)`,
-        }}
-      />
-
+      
       {/* Dot Grid Overlay */}
       <div
         className="fixed inset-0 pointer-events-none z-5 opacity-30"
@@ -245,12 +238,8 @@ const HomePage = () => {
                 Powered by AI
               </Badge>
             </motion.div>
-          </PointCloudAnimation>
+         
 
-          <PointCloudAnimation delay={800}>
-            <motion.h1
-              {...fadeInUp}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent"
             >
               Sua Jornada na Área{" "}
               <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">
@@ -258,17 +247,10 @@ const HomePage = () => {
               </span>{" "}
               Começa Aqui
             </motion.h1>
-          </PointCloudAnimation>
-
-          <PointCloudAnimation delay={1200}>
-            <motion.p
-              {...fadeInUp}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
-              className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed"
-            >
+          
               Acesse projetos, publique serviços e desenvolva sua carreira com IA, tecnologia e dados de mercado.
             </motion.p>
-          </PointCloudAnimation>
+         
 
           <motion.div
             {...fadeInUp}
