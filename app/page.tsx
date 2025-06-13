@@ -336,7 +336,6 @@ const HomePage = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Encontre o plano perfeito para você</h2>
         </motion.div>
      
-
       <motion.div
         variants={listStaggerContainer}
         initial="initial"
