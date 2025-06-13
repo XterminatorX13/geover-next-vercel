@@ -166,9 +166,17 @@ const iconHoverVariants = {
                 <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-[#36be82]/30 transition-all duration-300 group">
                   <CardContent className="p-8 h-full flex flex-col justify-between">
                     <div>
-                      <motion.div className="w-16 h-16 rounded-2xl bg-[#36be82]/10 dark:bg-[#36be82]/20 backdrop-blur-sm flex items-center justify-center mb-6 group-hover:bg-[#36be82]/20 dark:group-hover:bg-[#36be82]/30 transition-colors" variants={iconHoverVariants} whileHover="hover">
-                        <Brain className="w-8 h-8 text-[#36be82]" />
-                      </motion.div>
+                            
+<motion.div
+  className="w-16 h-16 ..."
+  variants={iconHoverVariants}
+  whileHover="hover"
+  transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+>
+  <Brain className="w-8 h-8 text-[#36be82]" />
+</motion.div>
+
+    
                       <h3 className="text-2xl font-bold mb-4">GeOver Agent</h3>
                       <p className="text-muted-foreground text-lg leading-relaxed">Seu assistente IA para propostas, contratos e orçamentos. Automatize tarefas complexas e foque no que realmente importa.</p>
                     </div>
