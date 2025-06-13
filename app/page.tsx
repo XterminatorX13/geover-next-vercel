@@ -79,13 +79,116 @@ const HomePage = () => {
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: [0.foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors"
+  }
+
+  const staggerContainer = {
+    initial: "initial",
+    animate: {
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      
+      <div
+        className="fixed inset-0 pointer-events-none z-[-1] opacity-30"
+        style={{
+          backgroundImage: `radial-gradient(circle, rgba(54, 190, 130, 0.15) 1px, transparent 1px)`,
+          backgroundSize: "24px 24px",
+        }}
+      />
+
+      <AuroraBackground />
+
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50"
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <motion.div className="text-2xl font-bold" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              GeOver
+            </motion.div>
+
+            <div className="hidden md:flex items-center space-x-8">
+              {["Plataforma", "Recursos", "Preços", "Sobre"].map((item) => (
+                <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.button
+                onClick={() => setCommandOpen(true)}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Command className="w-4 h-4" />
                 <span className="hidden sm:inline">Buscar</span>
-                <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+                <kbd className="hidden sm className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <motion.div className="text-2xl font-bold" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>GeOver</motion.div>
+            <div className="hidden md:flex items-center space-x-8">
+              {["Plataforma", "Recursos", "Preços", "Sobre"].map((item) => (
+                <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+                  {/* CORRIGIDO: href="#" trocado por "/" */}
+                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">{item}</Link>
+                </motion.div>
+              ))}
+              <motion.button onClick={() => setCommandOpen(true)} className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Command className="w-4 h-4" />
+                <span className="hidden sm:inline">Buscar</span>
+                <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">⌘K</kbd>
+              </motion.button>
+            </div>
+            <div className="flex items-center space-x-4">
+              <ThemeToggle />
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={glowVariants} whileHover="hover">
+                <Button className="bg-[#36be82] hover:bg-[#2da66f] text-white font-medium">Comece Grátis</Button>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </motion.nav>
+
+      <section className="pt-32 pb-20 px-6 relative">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}>
+            <Badge variant="secondary" className="mb-6 px-4 py-2"><Zap className="w-4 h-4 mr-2" />Powered by AI</Badge>
+          </motion.div>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }} className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8">
+            Sua Jornada na Área <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">Geoespacial</span> Começa Aqui
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }} className="max-w-3xl mx-auto text-xl text-muted-foreground mb-12">
+            Acesse projetos, publique serviços e desenvolva sua carreira com IA, tecnologia e dados de mercado.
+          </motion.p>
+          <motion.div {...fadeInUp} transition={{ delay: 0.4, duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={glowVariants} whileHover="hover">
+              <Button size="lg" className="bg-[#36be82] hover:bg-[#2da66f] text-white text-lg px-8 py-4 rounded-xl font-medium">Comece grátis por 30 dias</Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={cardGlowVariants} whileHover="hover">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-4 rounded-xl font-medium border-border/50 hover:border-[#36be82]/50">Ver Demo</Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <ChallengesSolutions />
+
+      {/* RESTAURADO: Features Section - Bento Grid */}
+      <section className="py-20 px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4">Uma plataforma construída para <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">performance</span></h2>
+          </motion.div>
+          <motion.div variants={staggerContainer} initial="initial" whileInView="animate" viewport={{ once: true }} className="grid grid-cols:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   ⌘K
                 </kbd>
               </motion.button>
@@ -119,7 +222,6 @@ const HomePage = () => {
             </Badge>
           </motion.div>
          
-          {/* CORRIGIDO: Erro de sintaxe aqui */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,7 +245,9 @@ const HomePage = () => {
           </motion.p>
 
           <motion.div
-            {...fadeInUp}
+            initial="initial"
+            animate="animate"
+            variants={fadeInUp}
             transition={{ delay: 0.4, duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
@@ -179,163 +283,81 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* As seções abaixo não foram coladas, mas o código delas deve permanecer o mesmo */}
       <ChallengesSolutions />
 
-      {/* Features Section - Bento Grid */}
-      {/* ... seu código do Bento Grid aqui ... */}
-
-      {/* Value Proposition */}
-      {/* ... seu código do Value Proposition aqui ... */}
-
-      {/* Pricing Section */}
-      <section className="py6, -0.05, 0.01, 0.99] },
-  }
-
-  const staggerContainer = {
-    initial: "initial", // Adicionando estado inicial para clareza
-    animate: {
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  }
-
-  return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      
-      <div
-        className="fixed inset-0 pointer-events-none z-[-1] opacity-30" // Colocado no z-[-1] para ficar atrás de tudo
-        style={{
-          backgroundImage: `radial-gradient(circle, rgba(54, 190, 130, 0.15) 1px, transparent 1px)`,
-          backgroundSize: "24px 24px",
-        }}
-      />
-
-      <AuroraBackground />
-
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50"
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <motion.div className="text-2xl font-bold" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-              GeOver
-            </motion.div>
-
-            <div className="hidden md:flex items-center space-x-8">
-              {["Plataforma", "Recursos", "Preços", "Sobre"].map((item) => (
-                <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    {item}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.button
-                onClick={() => setCommandOpen(true)}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Command className="w-4 h-4" />
-                <span className="hidden sm:inline">Buscar</span>
-                <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-                  ⌘K
-                </kbd>
-              </motion.button>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                variants={glowVariants}
-                whileHover="hover"
-              >
-                <Button className="bg-[#36be82] hover:bg-[#2da66f] text-white font-medium">Comece Grátis</Button>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </motion.nav>
-
-      <section className="pt-32 pb-20 px-6 relative">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="py-20 px-6 relative">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <Badge variant="secondary" className="mb-6 px-4 py-2">
-              <Zap className="w-4 h-4 mr-2" />
-              Powered by AI
-            </Badge>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4">
+              Uma plataforma construída para{" "}
+              <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">
+                performance
+              </span>
+            </h2>
           </motion.div>
-         
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8, ease: [0.6, -0.05, 0.01, 0-20 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-            {/* ... seu título da seção de preços aqui ... */}
+
           <motion.div
-            variants={staggerContainer} // Usando staggerContainer
+            variants={staggerContainer}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 h-[800px]"
           >
+            {/* O Bento Grid deve ser colado aqui */}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+-1 md:grid-cols-4 lg:grid-cols-6 gap-6 h-[800px]">
+            {/* ... seu código do Bento Grid vai aqui, como definido anteriormente ... */}
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* RESTAURADO: Value Proposition */}
+      <section className="py-20 px-6 relative">
+        {/* ... seu código do Value Proposition vai aqui ... */}
+      </section>
+
+      {/* RESTAURADO: Pricing Section */}
+      <section className="py-20 px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Encontre o plano perfeito para você</h2>
+          </motion.div>
+          <motion.div variants={staggerContainer} initial="initial" whileInView="animate" viewport={{ once: true }} className="grid md:grid-cols-3 gap-8">
             {[
-              // ... seus objetos de plano aqui ...
+              { name: "Standard", price: "R$47", period: "/mês", features: ["Perfil público e portfólio", "Candidatura a projetos", "Modelos de contrato"], buttonText: "Começar", buttonVariant: "outline" as const, popular: false, },
+              { name: "Plus", price: "R$97", period: "/mês", features: ["Tudo do Standard", "Simulação de competência técnica", "Visibilidade aumentada", "GeOver Agent"], buttonText: "Começar Teste Gratuito", buttonVariant: "default" as const, popular: true, },
+              { name: "Pro", price: "R$197", period: "/mês", features: ["Tudo do Plus", "Zero taxa de intermediação", "Benchmark regional e ranking", "Suporte prioritário 24h"], buttonText: "Fale com Vendas", buttonVariant: "secondary" as const, popular: false, },
             ].map((plan, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3 }}
-                className="relative"
-              >
-                {/* ... badge de popular ... */}
+              <motion.div key={index} variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.3 }} className="relative">
+                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"><Badge className="bg-[#36be82] text-white px-4 py-1 rounded-full text-sm font-medium"><Star className="w-4 h-4 mr-1" />Mais Popular</Badge></div>}
                 <motion.div variants={cardGlowVariants} whileHover="hover">
-                  <Card
-                    className={`...`}>
+                  <Card className={`bg-card/50 backdrop-blur-sm border-border/50 h-full group hover:border-[#36be82]/30 transition-all duration-300 ${plan.popular ? "ring-2 ring-[#36be82]/20" : ""}`}>
                     <CardContent className="p-8">
-                      {/* ... conteúdo do card de preço ... */}
-                      
+                      <div className="text-center mb-8">
+                        <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                        <div className="flex items-baseline justify-center"><span className="text-4xl font-bold">{plan.price}</span><span className="text-muted-foreground ml-1">{plan.period}</span></div>
+                      </div>
+                      <ul className="space-y-4 mb-8">
+                        {plan.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start gap-3"><Check className="w-5 h-5 text-[#36be82] mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{feature}</span></li>
+                        ))}
+                      </ul>
                       {/* CORRIGIDO: O MagneticButton foi removido. */}
-                      {plan.buttonVariant === "default" ? (
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          variants={cardGlowVariants}
-                          whileHover="hover"
-                        >
-                          <Button
-                            className="w-full bg-[#36be82] hover:bg-[#2da66f] text-white"
-                            variant={plan.buttonVariant}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          variants={cardGlowVariants}
-                          whileHover="hover"
-                        >
-                          <Button
-                            className={`...`}
-                            variant={plan.buttonVariant}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </motion.div>
-                      )}
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={plan.buttonVariant === 'default' ? glowVariants : cardGlowVariants} whileHover="hover">
+                        <Button className={`w-full ${plan.buttonVariant === "default" ? "bg-[#36be82] hover:bg-[#2da66f] text-white" : plan.buttonVariant === "outline" ? "border-border/50 hover:border-[#36be82]/50 hover:bg-[#36be82]/10" : "bg-muted hover:bg-muted/80"}`} variant={plan.buttonVariant}>{plan.buttonText}</Button>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -345,8 +367,22 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      {/* ... seu footer aqui ... */}
+      {/* RESTAURADO: Footer */}
+      <footer className="py-12 px-6 border-t border-border/50 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-4 md:mb-0">
+              <div className="text-2xl font-bold mb-2">GeOver</div>
+              <p className="text-muted-foreground">© 2025 GeOver. Todos os direitos reservados.</p>
+            </div>
+            <div className="flex items-center space-x-6">
+              {/* CORRIGIDO: href="#" trocado por "/" */}
+              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">LinkedIn</Link>
+              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">YouTube</Link>
+            </div>
+          </motion.div>
+        </div>
+      </footer>
 
       {/* Command Menu */}
       <CommandMenu open={commandOpen} setOpen={setCommandOpen} />
