@@ -28,7 +28,6 @@ const HomePage = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
