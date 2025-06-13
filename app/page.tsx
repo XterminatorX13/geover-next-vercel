@@ -451,26 +451,22 @@ const HomePage = () => {
                         ))}
                       </ul>
 
-                      {">"}                    
-                      ) : (
-                        <motion.div
-                          
-                          whileTap={{ scale: 0.95 }}
-                          variants={cardGlowVariants}
-                          whileHover="hover"
+                      <motion.div
+                        whileTap={{ scale: 0.95 }}
+                        variants={cardGlowVariants}
+                        whileHover="hover"
+                      >
+                        <Button
+                          className={`w-full ${
+                            plan.buttonVariant === "outline"
+                              ? "border-border/50 hover:border-[#36be82]/50 hover:bg-[#36be82]/10 text-foreground"
+                              : "bg-muted hover:bg-muted/80 text-foreground"
+                          }`}
+                          variant={plan.buttonVariant}
                         >
-                          <Button
-                            className={`w-full ${
-                              plan.buttonVariant === "outline"
-                                ? "border-border/50 hover:border-[#36be82]/50 hover:bg-[#36be82]/10"
-                                : "bg-muted hover:bg-muted/80"
-                            }`}
-                            variant={plan.buttonVariant}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </motion.div>
-                      ){"}"}
+                          {plan.buttonText}
+                        </Button>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </motion.div>
