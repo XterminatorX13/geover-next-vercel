@@ -502,6 +502,9 @@ const HomePage = () => {
     <Command className="w-6 h-6 group-hover:rotate-12 transition-transform duration-200" />
   </motion.button>
 
-  {/* Command Menu */}
-  <CommandMenu open={commandOpen} setOpen={setCommandOpen} />
-</div>
+   <CommandMenu open={commandOpen} setOpen={setCommandOpen} />
+    </div>
+  )
+}
+
+export default HomePage
