@@ -163,7 +163,7 @@ const HomePage = () => {
           </h2>
         </motion.div>
       >
-      
+
       {/* Bento Grid */}
       <motion.div
         variants={staggerContainer}
@@ -318,14 +318,14 @@ const HomePage = () => {
             custos e acelerar projetos. Uma plataforma que cresce com você.
           </p>
         </motion.div>
-      </PointCloudAnimation>
+      
     </div>
   </section>
 
   {/* Pricing Section */}
   <section className="py-20 px-6 relative">
     <div className="max-w-6xl mx-auto">
-      <PointCloudAnimation>
+      
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -335,7 +335,7 @@ const HomePage = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Encontre o plano perfeito para você</h2>
         </motion.div>
-      </PointCloudAnimation>
+     
 
       <motion.div
         variants={listStaggerContainer}
