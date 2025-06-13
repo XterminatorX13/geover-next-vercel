@@ -162,6 +162,7 @@ const HomePage = () => {
             </span>
           </h2>
         </motion.div>
+      >
       
       {/* Bento Grid */}
       <motion.div
