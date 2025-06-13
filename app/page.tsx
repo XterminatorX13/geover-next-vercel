@@ -155,7 +155,6 @@ const HomePage = () => {
        {/* Features Section - Bento Grid */}
       <section className="py-20 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          <PointCloudAnimation>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -307,7 +306,7 @@ const HomePage = () => {
       {/* Value Proposition */}
       <section className="py-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <PointCloudAnimation>
+          
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -326,14 +325,14 @@ const HomePage = () => {
                 custos e acelerar projetos. Uma plataforma que cresce com você.
               </p>
             </motion.div>
-          </PointCloudAnimation>
+         
         </div>
       </section>
 
       {/* Pricing Section */}
       <section className="py-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <PointCloudAnimation>
+          
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -430,15 +429,7 @@ const HomePage = () => {
                         ))}
                       </ul>
 
-                      {plan.buttonVariant === "default" ? (
-                        <MagneticButton mousePosition={mousePosition}>
-                          <Button
-                            className="w-full bg-[#36be82] hover:bg-[#2da66f] text-white"
-                            variant={plan.buttonVariant}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </MagneticButton>
+                      >                    
                       ) : (
                         <motion.div
                           whileHover={{ scale: 1.05 }}
