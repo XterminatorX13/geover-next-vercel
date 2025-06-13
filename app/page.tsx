@@ -63,13 +63,14 @@ const HomePage = () => {
     },
   }
 
-  const iconHoverVariants = {
-    hover: {
-      rotate: [0, 5, -5, 5, 0],
-      scale: 1.1,
-      transition: { duration: 0.5, ease: [0.25, 1, 0.5, 1] },
-    },
-  }
+  // SUBSTITUA A VERSÃO ANTIGA PELA NOVA
+
+const iconHoverVariants = {
+  hover: {
+    rotate: [0, 5, -5, 5, 0],
+    scale: 1.1,
+  },
+}
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
