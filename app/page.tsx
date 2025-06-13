@@ -163,7 +163,6 @@ const HomePage = () => {
           </h2>
         </motion.div>
       
-
       {/* Bento Grid */}
       <motion.div
         variants={staggerContainer}
