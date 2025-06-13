@@ -28,13 +28,7 @@ const HomePage = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", updateMousePosition)
-    return () => window.removeEventListener("mousemove", updateMousePosition)
-  }, [])
+  
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
