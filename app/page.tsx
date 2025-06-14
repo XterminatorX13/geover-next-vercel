@@ -183,7 +183,4 @@ const HomePage = () => {
 }
 
 export default HomePage
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-ão de forma independente e preguiçosa, resultando na performance máxima que você precisa.
+máxima que você precisa.
