@@ -186,8 +186,4 @@ export default HomePage
 IGNORE_WHEN_COPYING_START
 content_copy
 download
-Use code with caution.
-Tsx
-IGNORE_WHEN_COPYING_END
-
-Depois de fazer essa refatoração, seu page.tsx será apenas um orquestrador limpo, e o Next.js poderá carregar o código de cada seção de forma independente e preguiçosa, resultando na performance máxima que você precisa.
+ão de forma independente e preguiçosa, resultando na performance máxima que você precisa.
