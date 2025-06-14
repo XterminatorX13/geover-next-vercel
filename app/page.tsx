@@ -1,25 +1,113 @@
-"use client"
+Perfeito. Entendi.
 
-import type React from "react"
+A imagem e o link para o vscode.dev me dão o contexto completo da sua estrutura de arquivos atual. A sua organização está limpa e segue os padrões do Shadcn UI, com os componentes de UI em components/ui e os componentes mais complexos diretamente em components.
+
+Você está na etapa final de refatoração para performance, e eu vou te guiar passo a passo. Vamos usar a sua estrutura de arquivos existente para fazer a otimização.
+
+O Plano Final de Refatoração (Otimização Máxima)
+
+O objetivo é transformar seu app/page.tsx (que atualmente é um arquivo monolítico com todo o código) em um "orquestrador" enxuto, onde cada seção é um componente separado e carregado de forma inteligente.
+
+Siga estes passos.
+
+Passo 1: Crie a Pasta das Seções
+
+Dentro da sua pasta components, crie uma nova subpasta chamada sections. É aqui que vamos colocar os pedaços da sua landing page.
+
+Passo 2: O Trabalho de "Recortar e Colar"
+
+Você vai abrir seu app/page.tsx atual e começar a mover as seções para seus novos arquivos.
+
+Crie src/components/sections/hero.tsx:
+
+Crie este novo arquivo.
+
+Volte para app/page.tsx, encontre a primeira tag <section> (a que contém o título "Sua Jornada...").
+
+Recorte (Ctrl+X) todo o bloco, da <section> de abertura até a </section> de fechamento.
+
+Cole dentro de um novo componente Hero no arquivo hero.tsx.
+
+Adicione os imports necessários no topo do hero.tsx (para motion, Button, Badge, Link, etc.).
+
+Exemplo do hero.tsx:
+
+"use client" // Necessário por causa das animações
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Check, Zap, TrendingUp, BarChart3, Brain, Target, Star, Command } from "lucide-react"
-import Link from "next/link"
+import { Zap } from "lucide-react"
+// ... adicione outros imports que ele usar
+
+export const Hero = () => {
+  // Se você tiver variantes de animação SÓ usadas aqui, mova-as para cá também
+  const fadeInUp = { /* ... */ }
+  const glowVariants = { /* ... */ }
+
+  return (
+    <section className="pt-32 pb-20 px-6 relative">
+      {/* SEU CÓDIGO JSX DO HERO VAI AQUI */}
+    </section>
+  );
+};
+
+
+Crie src/components/sections/features.tsx:
+
+Faça o mesmo para a seção do "Bento Grid". Recorte a <section> inteira do page.tsx e cole-a em um novo componente Features dentro deste arquivo.
+
+Adicione todos os imports necessários (Card, CardContent, Brain, BarChart3, etc.).
+
+Crie src/components/sections/value-prop.tsx:
+
+Faça o mesmo para a seção com o título "O futuro da topografia é inteligente".
+
+Crie src/components/sections/pricing.tsx:
+
+Faça o mesmo para a seção "Encontre o plano perfeito para você".
+
+Crie src/components/sections/main-footer.tsx:
+
+Faça o mesmo para a tag <footer>.
+
+Passo 3: A Montagem Final em app/page.tsx
+
+Depois de mover todo o JSX para seus respectivos arquivos, seu app/page.tsx estará quase vazio. Agora é a hora de colar o código otimizado.
+
+Substitua todo o conteúdo do seu app/page.tsx por este código final:
+
+"use client" // É um componente cliente porque usa hooks (useState, useEffect)
+
+import type React from "react"
 import { useState, useEffect } from "react"
-import { CommandMenu } from "@/components/command-menu"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { AuroraBackground } from "@/components/aurora-background"
+import dynamic from 'next/dynamic'
+
+// --- Componentes Essenciais (Carregados Imediatamente) ---
+import { Hero } from '@/components/sections/hero'
+import { MainFooter } from '@/components/sections/main-footer' // O footer é leve, pode carregar direto
 import { SpiritLevelLoader } from "@/components/spirit-level-loader"
-import { ChallengesSolutions } from "@/components/challenges-solutions"
+import { AuroraBackground } from "@/components/aurora-background"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { CommandMenu } from "@/components/command-menu"
+import { motion } from "framer-motion"
+import { Command } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+
+// --- Placeholder de Carregamento para Componentes Dinâmicos ---
+const SectionSkeleton = () => <div className="w-full h-[70vh] bg-transparent" />
+
+// --- Componentes Pesados (Carregados sob Demanda) ---
+const DynamicChallenges = dynamic(() => import('@/components/challenges-solutions').then(mod => mod.ChallengesSolutions), { ssr: false, loading: SectionSkeleton })
+const DynamicFeatures = dynamic(() => import('@/components/sections/features').then(mod => mod.Features), { ssr: false, loading: SectionSkeleton })
+const DynamicValueProp = dynamic(() => import('@/components/sections/value-prop').then(mod => mod.ValueProp), { ssr: false, loading: SectionSkeleton })
+const DynamicPricing = dynamic(() => import('@/components/sections/pricing').then(mod => mod.Pricing), { ssr: false, loading: SectionSkeleton })
 
 const HomePage = () => {
   const [commandOpen, setCommandOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 2000)
     return () => clearTimeout(timer)
   }, [])
@@ -48,7 +136,7 @@ const HomePage = () => {
     )
   }
 
-  // --- Animation Variants ---
+  // As definições de animação podem ficar aqui ou ser movidas para um arquivo utils
   const glowVariants = {
     hover: {
       boxShadow: "0 0 0 1px rgba(54, 190, 130, 0.3), 0 0 20px rgba(54, 190, 130, 0.2), 0 0 40px rgba(54, 190, 130, 0.1)",
@@ -56,257 +144,50 @@ const HomePage = () => {
     },
   }
 
-  const cardGlowVariants = {
-    hover: {
-      boxShadow: "0 0 0 1px rgba(54, 190, 130, 0.4), 0 0 30px rgba(54, 190, 130, 0.15), 0 0 60px rgba(54, 190, 130, 0.05)",
-      transition: { duration: 0.3 },
-    },
-  }
-
-  // SUBSTITUA A VERSÃO ANTIGA PELA NOVA
-
-const iconHoverVariants = {
-  hover: {
-    rotate: [0, 5, -5, 5, 0],
-    scale: 1.1,
-  },
-}
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-  }
-
-  const staggerContainer = {
-    initial: "initial",
-    animate: {
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  }
-
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      
       <div className="fixed inset-0 pointer-events-none z-[-1] opacity-30" style={{ backgroundImage: `radial-gradient(circle, rgba(54, 190, 130, 0.15) 1px, transparent 1px)`, backgroundSize: "24px 24px" }} />
       <AuroraBackground />
 
       <motion.nav initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <motion.div className="text-2xl font-bold" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-              GeOver
-            </motion.div>
+            <motion.div className="text-2xl font-bold" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>GeOver</motion.div>
             <div className="hidden md:flex items-center space-x-8">
               {["Plataforma", "Recursos", "Preços", "Sobre"].map((item) => (
-                <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">{item}</Link>
-                </motion.div>
+                <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}><Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">{item}</Link></motion.div>
               ))}
-              <motion.button onClick={() => setCommandOpen(true)} className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Command className="w-4 h-4" />
-                <span className="hidden sm:inline">Buscar</span>
-                <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">⌘K</kbd>
-              </motion.button>
+              <motion.button onClick={() => setCommandOpen(true)} className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-[#36be82]/50 transition-colors" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><Command className="w-4 h-4" /><span className="hidden sm:inline">Buscar</span><kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">⌘K</kbd></motion.button>
             </div>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={glowVariants} whileHover="hover">
-                <Button className="bg-[#36be82] hover:bg-[#2da66f] text-white font-medium">Comece Grátis</Button>
-              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={glowVariants} whileHover="hover"><Button className="bg-[#36be82] hover:bg-[#2da66f] text-white font-medium">Comece Grátis</Button></motion.div>
             </div>
           </div>
         </div>
       </motion.nav>
-
-      <section className="pt-32 pb-20 px-6 relative">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}>
-            <Badge variant="secondary" className="mb-6 px-4 py-2"><Zap className="w-4 h-4 mr-2" />Powered by AI</Badge>
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }} className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8">
-            Sua Jornada na Área <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">Geoespacial</span> Começa Aqui
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }} className="max-w-3xl mx-auto text-xl text-muted-foreground mb-12">
-            Acesse projetos, publique serviços e desenvolva sua carreira com IA, tecnologia e dados de mercado.
-          </motion.p>
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ delay: 0.4, duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={glowVariants} whileHover="hover">
-              <Button size="lg" className="bg-[#36be82] hover:bg-[#2da66f] text-white text-lg px-8 py-4 rounded-xl font-medium">Comece grátis por 30 dias</Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={cardGlowVariants} whileHover="hover">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4 rounded-xl font-medium border-border/50 hover:border-[#36be82]/50">Ver Demo</Button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      <ChallengesSolutions />
-
-      {/* Features Section - Bento Grid */}
-      <section className="py-20 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4">
-              Uma plataforma construída para <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">performance</span>
-            </h2>
-          </motion.div>
-          
-          <motion.div variants={staggerContainer} initial="initial" whileInView="animate" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 h-[800px]">
-            {/* INSERIDO: Código do Bento Grid */}
-            <motion.div variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} className="md:col-span-2 lg:col-span-3 md:row-span-2">
-              <motion.div variants={cardGlowVariants} whileHover="hover">
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-[#36be82]/30 transition-all duration-300 group">
-                  <CardContent className="p-8 h-full flex flex-col justify-between">
-                    <div>
-                            
-<motion.div
-  className="w-16 h-16 ..."
-  variants={iconHoverVariants}
-  whileHover="hover"
-  transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
->
-  <Brain className="w-8 h-8 text-[#36be82]" />
-</motion.div>
-
-    
-                      <h3 className="text-2xl font-bold mb-4">GeOver Agent</h3>
-                      <p className="text-muted-foreground text-lg leading-relaxed">Seu assistente IA para propostas, contratos e orçamentos. Automatize tarefas complexas e foque no que realmente importa.</p>
-                    </div>
-                    <div className="mt-8 p-4 rounded-xl bg-muted/30 border border-border/30">
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground"><div className="w-2 h-2 rounded-full bg-[#36be82] animate-pulse"></div>Processando orçamento automaticamente...</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} className="md:col-span-2 lg:col-span-2">
-              <motion.div variants={cardGlowVariants} whileHover="hover">
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-[#36be82]/30 transition-all duration-300 group">
-                  <CardContent className="p-6 h-full">
-                    <motion.div className="w-12 h-12 rounded-xl bg-[#36be82]/10 dark:bg-[#36be82]/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-[#36be82]/20 dark:group-hover:bg-[#36be82]/30 transition-colors" variants={iconHoverVariants} whileHover="hover">
-                      <BarChart3 className="w-6 h-6 text-[#36be82]" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold mb-3">Simulação de Orçamento</h3>
-                    <p className="text-muted-foreground">Estimativas inteligentes com base em dados de mercado em tempo real.</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} className="md:col-span-2 lg:col-span-1">
-              <motion.div variants={cardGlowVariants} whileHover="hover">
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-[#36be82]/30 transition-all duration-300 group">
-                  <CardContent className="p-6 h-full flex flex-col justify-center items-center text-center">
-                    <motion.div className="w-12 h-12 rounded-xl bg-[#36be82]/10 dark:bg-[#36be82]/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-[#36be82]/20 dark:group-hover:bg-[#36be82]/30 transition-colors" variants={iconHoverVariants} whileHover="hover">
-                      <Target className="w-6 h-6 text-[#36be82]" />
-                    </motion.div>
-                    <h3 className="text-lg font-bold mb-2">Precisão</h3>
-                    <p className="text-sm text-muted-foreground">99.9% de acurácia</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} className="md:col-span-4 lg:col-span-3">
-              <motion.div variants={cardGlowVariants} whileHover="hover">
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-[#36be82]/30 transition-all duration-300 group">
-                  <CardContent className="p-6 h-full">
-                    <motion.div className="w-12 h-12 rounded-xl bg-[#36be82]/10 dark:bg-[#36be82]/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-[#36be82]/20 dark:group-hover:bg-[#36be82]/30 transition-colors" variants={iconHoverVariants} whileHover="hover">
-                      <TrendingUp className="w-6 h-6 text-[#36be82]" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold mb-3">Portfólio com Ranking</h3>
-                    <p className="text-muted-foreground mb-4">Conquiste visibilidade com destaque automatizado baseado em performance.</p>
-                    <div className="flex gap-2">
-                      {[1, 2, 3, 4, 5].map((i) => (<div key={i} className="flex-1 h-2 rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-[#36be82] to-[#2da66f]" style={{ width: `${100 - i * 15}%` }} /></div>))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }} viewport={{ once: true }} className="text-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8">
-              O futuro da topografia é <span className="bg-gradient-to-r from-[#36be82] to-[#2da66f] bg-clip-text text-transparent">inteligente</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Conectamos profissionais qualificados a oportunidades reais, usando IA para otimizar processos, reduzir custos e acelerar projetos. Uma plataforma que cresce com você.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-20 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Encontre o plano perfeito para você</h2>
-          </motion.div>
-     
-          <motion.div variants={staggerContainer} initial="initial" whileInView="animate" viewport={{ once: true }} className="grid md:grid-cols-3 gap-8">
-            {/* INSERIDO: Código da Seção de Preços */}
-            {[
-              { name: "Standard", price: "R$47", period: "/mês", features: ["Perfil público e portfólio", "Candidatura a projetos", "Modelos de contrato"], buttonText: "Começar", buttonVariant: "outline" as const, popular: false },
-              { name: "Plus", price: "R$97", period: "/mês", features: ["Tudo do Standard", "Simulação de competência técnica", "Visibilidade aumentada", "GeOver Agent"], buttonText: "Começar Teste Gratuito", buttonVariant: "default" as const, popular: true },
-              { name: "Pro", price: "R$197", period: "/mês", features: ["Tudo do Plus", "Zero taxa de intermediação", "Benchmark regional e ranking", "Suporte prioritário 24h"], buttonText: "Fale com Vendas", buttonVariant: "secondary" as const, popular: false },
-            ].map((plan, index) => (
-              <motion.div key={index} variants={fadeInUp} whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.3 }} className="relative">
-                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"><Badge className="bg-[#36be82] text-white px-4 py-1 rounded-full text-sm font-medium"><Star className="w-4 h-4 mr-1" />Mais Popular</Badge></div>}
-                <motion.div variants={cardGlowVariants} whileHover="hover">
-                  <Card className={`bg-card/50 backdrop-blur-sm border-border/50 h-full group hover:border-[#36be82]/30 transition-all duration-300 ${plan.popular ? "ring-2 ring-[#36be82]/20" : ""}`}>
-                    <CardContent className="p-8 flex flex-col">
-                      <div className="text-center mb-8">
-                        <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                        <div className="flex items-baseline justify-center"><span className="text-4xl font-bold">{plan.price}</span><span className="text-muted-foreground ml-1">{plan.period}</span></div>
-                      </div>
-                      <ul className="space-y-4 mb-8 flex-grow">
-                        {plan.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-start gap-3"><Check className="w-5 h-5 text-[#36be82] mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{feature}</span></li>
-                        ))}
-                      </ul>
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={plan.buttonVariant === 'default' ? glowVariants : cardGlowVariants} whileHover="hover">
-                        <Button className={`w-full ${plan.buttonVariant === "default" ? "bg-[#36be82] hover:bg-[#2da66f] text-white" : plan.buttonVariant === "outline" ? "border-border/50 hover:border-[#36be82]/50 hover:bg-[#36be82]/10" : "bg-muted hover:bg-muted/80"}`} variant={plan.buttonVariant}>{plan.buttonText}</Button>
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <footer className="py-12 px-6 border-t border-border/50 relative">
-        <div className="max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0">
-              <div className="text-2xl font-bold mb-2">GeOver</div>
-              <p className="text-muted-foreground">© 2025 GeOver. Todos os direitos reservados.</p>
-            </div>
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">LinkedIn</Link>
-              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">YouTube</Link>
-            </div>
-          </motion.div>
-        </div>
-      </footer>
-
+      
+      <main>
+        <Hero />
+        <DynamicChallenges />
+        <DynamicFeatures />
+        <DynamicValueProp />
+        <DynamicPricing />
+      </main>
+      
+      <MainFooter />
+      
       <CommandMenu open={commandOpen} setOpen={setCommandOpen} />
     </div>
   )
 }
 
 export default HomePage
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Tsx
+IGNORE_WHEN_COPYING_END
+
+Depois de fazer essa refatoração, seu page.tsx será apenas um orquestrador limpo, e o Next.js poderá carregar o código de cada seção de forma independente e preguiçosa, resultando na performance máxima que você precisa.
