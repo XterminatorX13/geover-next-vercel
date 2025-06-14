@@ -183,4 +183,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-máxima que você precisa.
