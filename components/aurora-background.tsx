@@ -22,9 +22,9 @@ export function AuroraBackground() {
         className="absolute inset-0"
         animate={{
           background: [
-            "radial-gradient(600px circle at 0% 0%, rgba(120, 119, 198, 0.3), transparent 50%), radial-gradient(800px circle at 80% 100%, rgba(54, 190, 130, 0.15), transparent 50%), radial-gradient(400px circle at 40% 40%, rgba(120, 119, 198, 0.2), transparent 50%)",
-            "radial-gradient(600px circle at 100% 0%, rgba(54, 190, 130, 0.3), transparent 50%), radial-gradient(800px circle at 0% 100%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(400px circle at 60% 60%, rgba(54, 190, 130, 0.2), transparent 50%)",
-            "radial-gradient(600px circle at 0% 100%, rgba(120, 119, 198, 0.3), transparent 50%), radial-gradient(800px circle at 100% 0%, rgba(54, 190, 130, 0.15), transparent 50%), radial-gradient(400px circle at 20% 80%, rgba(120, 119, 198, 0.2), transparent 50%)",
+            "radial-gradient(600px circle at 0% 0%, rgba(52, 211, 153, 0.15), transparent 50%), radial-gradient(800px circle at 80% 100%, rgba(16, 185, 129, 0.1), transparent 50%), radial-gradient(400px circle at 40% 40%, rgba(52, 211, 153, 0.1), transparent 50%)",
+            "radial-gradient(600px circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%), radial-gradient(800px circle at 0% 100%, rgba(52, 211, 153, 0.1), transparent 50%), radial-gradient(400px circle at 60% 60%, rgba(16, 185, 129, 0.1), transparent 50%)",
+            "radial-gradient(600px circle at 0% 100%, rgba(52, 211, 153, 0.15), transparent 50%), radial-gradient(800px circle at 100% 0%, rgba(16, 185, 129, 0.1), transparent 50%), radial-gradient(400px circle at 20% 80%, rgba(52, 211, 153, 0.1), transparent 50%)",
           ],
         }}
         transition={{
@@ -39,7 +39,7 @@ export function AuroraBackground() {
       <motion.div
         className="absolute w-96 h-96 rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(54, 190, 130, 0.1) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, transparent 70%)",
           filter: "blur(40px)",
         }}
         animate={{
@@ -57,7 +57,7 @@ export function AuroraBackground() {
       <motion.div
         className="absolute w-64 h-64 rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(120, 119, 198, 0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)",
           filter: "blur(30px)",
         }}
         animate={{

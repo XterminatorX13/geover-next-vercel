@@ -43,19 +43,19 @@ export function SpiritLevelLoader({ size = 80, className = "" }: SpiritLevelLoad
       >
         {/* Outer Circle */}
         <div
-          className="absolute inset-0 rounded-full border-2 border-[#36be82]/30 bg-background/50 backdrop-blur-sm"
+          className="absolute inset-0 rounded-full border-2 border-[#34D399]/30 bg-background/50 backdrop-blur-sm"
           style={{ width: size, height: size }}
         />
 
         {/* Inner Circle Guide */}
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#36be82]/20"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#34D399]/20"
           style={{ width: size * 0.3, height: size * 0.3 }}
         />
 
         {/* Center Dot */}
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#36be82]/40"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#34D399]/40"
           style={{ width: 2, height: 2 }}
         />
 
@@ -64,11 +64,11 @@ export function SpiritLevelLoader({ size = 80, className = "" }: SpiritLevelLoad
           variants={bubbleVariants}
           initial="initial"
           animate="animate"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#36be82] to-[#2da66f] shadow-lg"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#34D399] to-[#10B981] shadow-lg"
           style={{
             width: size * 0.25,
             height: size * 0.25,
-            boxShadow: "0 0 20px rgba(54, 190, 130, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 0 20px rgba(52, 211, 153, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3)",
           }}
         >
           {/* Bubble Highlight */}
@@ -79,8 +79,8 @@ export function SpiritLevelLoader({ size = 80, className = "" }: SpiritLevelLoad
         </motion.div>
 
         {/* Level Lines */}
-        <div className="absolute top-1/2 left-2 right-2 h-px bg-[#36be82]/20 transform -translate-y-1/2" />
-        <div className="absolute left-1/2 top-2 bottom-2 w-px bg-[#36be82]/20 transform -translate-x-1/2" />
+        <div className="absolute top-1/2 left-2 right-2 h-px bg-[#34D399]/20 transform -translate-y-1/2" />
+        <div className="absolute left-1/2 top-2 bottom-2 w-px bg-[#34D399]/20 transform -translate-x-1/2" />
       </motion.div>
     </div>
   )
